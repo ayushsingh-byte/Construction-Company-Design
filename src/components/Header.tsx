@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
@@ -16,16 +17,11 @@ const navLinks = [
   { name: 'Contact', href: '/contact' },
 ];
 
-export function Logo() {
+export function Logo({ className = 'h-10 sm:h-12 w-auto' }: { className?: string }) {
   return (
-    <Link href="/" className="flex items-center gap-3 group" aria-label="Keltch Engineering home">
-      <span className="relative w-9 h-9 rounded-full bg-brand-400 text-ink-950 flex items-center justify-center font-display font-bold text-sm tracking-tight transition-transform duration-500 group-hover:rotate-[360deg]">
-        KE
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-lg font-bold tracking-tight text-white">Keltch Engineering</span>
-        <span className="text-[10px] uppercase tracking-[0.22em] text-ink-400 mt-1">Delivering excellence</span>
-      </span>
+    <Link href="/" aria-label="Keltch Engineering home" className="shrink-0">
+      {/* Vector rebuild of the company logo; do not restyle */}
+      <Image src="/logo.svg" alt="Keltch Engineering — Delivering Excellence" width={552} height={109} priority className={className} />
     </Link>
   );
 }
@@ -60,7 +56,7 @@ export default function Header() {
     >
       <nav
         className={`relative transition-colors duration-500 ${
-          scrolled ? 'bg-ink-950/80 backdrop-blur-xl' : 'bg-ink-950'
+          scrolled ? 'bg-white/90 backdrop-blur-xl shadow-[0_1px_0_rgba(13,20,36,0.08)]' : 'bg-white'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
@@ -73,7 +69,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative py-2 text-sm transition-colors ${active ? 'text-white' : 'text-ink-300 hover:text-white'}`}
+                  className={`relative py-2 text-sm transition-colors ${active ? 'text-ink-900' : 'text-ink-500 hover:text-ink-900'}`}
                 >
                   {link.name}
                   {active && (
@@ -90,7 +86,7 @@ export default function Header() {
 
           <Link
             href="/contact"
-            className="group hidden md:inline-flex items-center gap-2 pl-5 pr-4 py-2.5 text-sm font-semibold text-ink-950 bg-brand-400 hover:bg-brand-300 rounded-full transition-colors"
+            className="group hidden md:inline-flex items-center gap-2 pl-5 pr-4 py-2.5 text-sm font-semibold text-white bg-ink-950 hover:bg-ink-800 rounded-full transition-colors"
           >
             Get a quote
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -99,7 +95,7 @@ export default function Header() {
           <button
             onClick={() => setMobileOpen((o) => !o)}
             type="button"
-            className="md:hidden p-2 rounded-lg text-white hover:bg-white/10"
+            className="md:hidden p-2 rounded-lg text-ink-900 hover:bg-ink-50"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileOpen}
           >
