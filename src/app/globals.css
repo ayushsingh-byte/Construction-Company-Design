@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* Map next/font variables (set on <html> in layout.tsx) to Tailwind font utilities */
+@theme inline {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
+}
+
+/* Palette: deep ink navy + warm paper + electric amber accent */
+@theme {
+  --color-brand-50: #fff8eb;
+  --color-brand-100: #feeac7;
+  --color-brand-200: #fdd38a;
+  --color-brand-300: #fcb94d;
+  --color-brand-400: #f9a21f;
+  --color-brand-500: #ea8a0c;
+  --color-brand-600: #c26a07;
+  --color-brand-700: #9a4f0b;
+  --color-brand-800: #7c3f10;
+  --color-brand-900: #663511;
+
+  --color-ink-50: #f4f6fa;
+  --color-ink-100: #e4e8f0;
+  --color-ink-200: #c9d0de;
+  --color-ink-300: #9ba6bc;
+  --color-ink-400: #6c7892;
+  --color-ink-500: #4b5670;
+  --color-ink-600: #343e56;
+  --color-ink-700: #242d42;
+  --color-ink-800: #161e30;
+  --color-ink-900: #0d1424;
+  --color-ink-950: #070b15;
+
+  --color-paper: #f6f5f1;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-flow: flow 3s linear infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes flow {
+    to { stroke-dashoffset: -200; }
+  }
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-brand-400);
+    color: var(--color-ink-950);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-flow { animation: none; }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-300);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-500);
+}
+
+/* Hollow display numerals */
+.text-outline-dark {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-ink-300);
+}
+.text-outline-light {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
+}
+.text-outline-brand {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-brand-400);
+}
